@@ -9,6 +9,10 @@ pipeline {
         IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
+    triggers {
+        githubPush()
+    }
+
     stages {
 
         stage('Build') {
