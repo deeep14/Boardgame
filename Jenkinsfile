@@ -49,9 +49,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh """
-                    sh "/home/ec2-user/bin/kubectl apply -f deployment-service.yaml"
-                """
+                sh 'kubectl apply -f deployment-service.yaml'
             }
         }
 
