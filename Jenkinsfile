@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     environment {
         JAVA_HOME = "/usr/lib/jvm/java-21-amazon-corretto.x86_64"
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
@@ -10,14 +10,14 @@ pipeline {
     }
 
     stages {
-        
+
         stage('Build') {
             steps {
-             sh 'mvn compile'
+                sh 'mvn compile'
             }
         }
 
-        stage('test') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Package') {
             steps {
-               sh 'mvn package'
+                sh 'mvn package'
             }
         }
 
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Push to ECR') {
             steps {
-                script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
                         aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}
                         docker tag boardgame:${IMAGE_TAG} ${ECR_REPO}:${IMAGE_TAG}
@@ -49,13 +49,12 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                script {
-                    sh """
-                        kubectl set image deployment/boardgame-deployment boardgame=${ECR_REPO}:${IMAGE_TAG} --record
-                        kubectl rollout status deployment/boardgame-deployment
-                    """
-                }
+                sh """
+                    kubectl apply -f k8s/deployment.yaml
+                    kubectl rollout status deployment/boardgame-deployment
+                """
             }
         }
+
     }
 }
