@@ -55,7 +55,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
-                        kubectl set image deployment/boardgame boardgame=${ECR_REPO}:${IMAGE_TAG} --record
+                        kubectl apply -f deployment-service.yaml
                         kubectl rollout status deployment/boardgame
                     """
                 }
