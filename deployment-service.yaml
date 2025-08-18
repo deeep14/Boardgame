@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: boardgame
-        image: 881601365147.dkr.ecr.us-east-1.amazonaws.com/boardgame:${IMAGE_TAG}
+        image: 881601365147.dkr.ecr.us-east-1.amazonaws.com/boardgame:latest
         ports:
         - containerPort: 8080
         resources:

@@ -35,7 +35,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t boardgame:${IMAGE_TAG} .'
+                sh 'docker build -t boardgame:latest .'
             }
         }
 
@@ -44,8 +44,8 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
                         aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}
-                        docker tag boardgame:${IMAGE_TAG} ${ECR_REPO}:${IMAGE_TAG}
-                        docker push ${ECR_REPO}:${IMAGE_TAG}
+                        docker tag boardgame:latest ${ECR_REPO}:latest
+                        docker push ${ECR_REPO}:latest
                     """
                 }
             }
