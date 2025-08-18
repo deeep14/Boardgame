@@ -54,7 +54,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
-                    // Update the deployment with the new image tag
                     sh """
                         kubectl set image deployment/boardgame boardgame=${ECR_REPO}:${IMAGE_TAG} --record
                         kubectl rollout status deployment/boardgame
