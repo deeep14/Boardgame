@@ -35,7 +35,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t boardgame:latest .'
+                sh 'docker build -t boardgame:${IMAGE_TAG} .'
             }
         }
 
@@ -44,8 +44,8 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
                         aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}
-                        docker tag boardgame:latest ${ECR_REPO}:latest
-                        docker push ${ECR_REPO}:latest
+                        docker tag boardgame:${IMAGE_TAG} ${ECR_REPO}:${IMAGE_TAG}
+                        docker push ${ECR_REPO}:${IMAGE_TAG}
                     """
                 }
             }
@@ -55,6 +55,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
+                        sed -i 's#IMAGE_TAG#${IMAGE_TAG}#g' deployment-service.yaml
                         kubectl apply -f deployment-service.yaml
                         kubectl rollout status deployment/boardgame
                     """
