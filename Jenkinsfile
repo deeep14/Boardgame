@@ -35,11 +35,12 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarScanner') { // Name configured in Jenkins system settings
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=boardgame -Dsonar.host.url=http://54.167.44.154:9000/'
+                withSonarQubeEnv('SonarScanner') {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=boardgame'
                 }
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
