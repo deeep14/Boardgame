@@ -36,7 +36,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarScanner') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=boardgame'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=boardgame -Dsonar.login=$SONAR_AUTH_TOKEN'
                 }
             }
         }
