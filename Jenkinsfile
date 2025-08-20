@@ -46,12 +46,12 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: 'http://3.86.97.167:8081/',
-                    repository: 'maven-releases',
+                    nexusUrl: 'http://52.54.249.53:8081/',
+                    repository: 'maven-jenkins',
                     credentialsId: 'nexus-creds',
                     groupId: 'com.example',
                     version: '1.0.${BUILD_NUMBER}',
-                    artifacts: [[artifactId: 'boardgame', classifier: '', file: 'target/*.jar', type: 'jar']]
+                    artifacts: [[artifactId: 'boardgame', classifier: '', file: 'target/database_service_project-0.0.7-SNAPSHOT.jar', type: 'jar']]
                 )
             }
         }
