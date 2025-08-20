@@ -46,7 +46,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: 'http://52.54.249.53:8081/',
+                    nexusUrl: '52.54.249.53:8081',
                     repository: 'maven-jenkins',
                     credentialsId: 'nexus-creds',
                     groupId: 'com.example',
