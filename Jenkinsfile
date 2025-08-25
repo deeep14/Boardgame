@@ -79,6 +79,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
                         sed -i 's#IMAGE_TAG#${IMAGE_TAG}#g' deployment-service.yaml
+                        aws eks update-kubeconfig --name workshop-eks-cluster --region us-east-2
                         kubectl apply -f deployment-service.yaml
                         kubectl rollout status deployment/boardgame
                     """
