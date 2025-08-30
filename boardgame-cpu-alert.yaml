@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: boardgame-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: boardgame.rules
+    rules:
+    - alert: HighCPUUsage
+      expr: process_cpu_usage > 0.8
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High CPU usage on boardgame app"
+        description: "CPU usage is above 80% for more than 2 minutes."
