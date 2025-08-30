@@ -46,7 +46,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: '54.174.101.230:8081',
+                    nexusUrl: '18.233.249.90:8081',
                     repository: 'maven-jenkins',
                     credentialsId: 'nexus-creds',
                     groupId: 'com.example',
@@ -79,7 +79,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-creds']]) {
                     sh """
                         sed -i 's#IMAGE_TAG#${IMAGE_TAG}#g' deployment-service.yaml
-                        aws eks update-kubeconfig --name workshop-eks-cluster --region us-east-2
+                        aws eks update-kubeconfig --name k8s-workshop-eks-cluster --region us-east-2
                         kubectl apply -f deployment-service.yaml
                         kubectl rollout status deployment/boardgame
                     """
