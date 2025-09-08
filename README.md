@@ -25,14 +25,6 @@ The pipeline automates building, testing, packaging, containerization, pushing t
 *   **Monitoring & Alerting**: Prometheus + ServiceMonitor + Alertmanager
     
 
-📂 Project Structure
---------------------
-└── src/                          # Java source code   
-├── Jenkinsfile                   # CI/CD pipeline definition  
-├── deployment-service.yaml       # Deployment + Service manifest 
-├── boardgame-servicemonitor.yaml # Prometheus ServiceMonitor  
-├── boardgame-cpu-alert.yaml      # Prometheus alert rules  
-
 ⚙️ Jenkins Pipeline Stages
 --------------------------
 
