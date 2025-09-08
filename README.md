@@ -103,7 +103,7 @@ The app exposes Prometheus metrics at /actuator/prometheus.
         
     *   aws-creds (AWS Access Key/Secret)
         
-    *   SONAR\_AUTH\_TOKEN (SonarQube token)
+    *   sonar-creds (SonarQube token)
         
 3.  Push changes to GitHub → Jenkins pipeline triggers automatically.
     
