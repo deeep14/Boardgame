@@ -27,8 +27,11 @@ The pipeline automates building, testing, packaging, containerization, pushing t
 
 📂 Project Structure
 --------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   .  ├── Jenkinsfile                  # CI/CD pipeline definition  ├── deployment-service.yaml       # Deployment + Service manifest  ├── boardgame-servicemonitor.yaml # Prometheus ServiceMonitor  ├── boardgame-cpu-alert.yaml      # Prometheus alert rules  └── src/                          # Java source code   `
+└── src/                          # Java source code   
+├── Jenkinsfile                   # CI/CD pipeline definition  
+├── deployment-service.yaml       # Deployment + Service manifest 
+├── boardgame-servicemonitor.yaml # Prometheus ServiceMonitor  
+├── boardgame-cpu-alert.yaml      # Prometheus alert rules  
 
 ⚙️ Jenkins Pipeline Stages
 --------------------------
